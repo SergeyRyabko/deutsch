@@ -1,0 +1,7 @@
+#!/bin/bash
+rm verbs_*
+count=$(wc -l < verbs | bc);
+for (( c=5; c<=$count+5; c=c+5 ))
+do  
+   head -n$c verbs | tail -n5 > verbs_$c
+done

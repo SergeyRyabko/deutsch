@@ -4,11 +4,21 @@ array_shift($argv);
 
 $lines = [];
 foreach ($argv as $path) {
+
+  if (!file_exists($path)) {
+    continue;
+  }
+
   if (!$contents = file_get_contents($path)) {
     continue;
   }
 
   $lines = array_merge($lines, explode(PHP_EOL, trim($contents)));
+}
+
+if (!$lines) {
+  echo 'No lines to process' . PHP_EOL;
+  die;
 }
 
 $lines = array_fill_keys($lines, 0);
